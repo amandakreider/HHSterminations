@@ -34,8 +34,18 @@ label var for_cause_num "For Cause"
 
 compress
 
-save "HHS_Grants_Terminated.dta"
+merge m:1 recipient_name using "crosswalk.dta", ///
+	keep(master match) gen(merge_xwalk) keepusing(recip_name_standardized)
+	
+drop merge_xwalk
 
-export delimited using "HHS_Grants_Terminated.csv", quote
+order awarding_office fain award_num recip_name_standardized
+compress
 
-clear
+gsort recip_name_standardized date_terminated
+
+save "HHS_Grants_Terminated.dta", replace
+
+export delimited using "HHS_Grants_Terminated.csv", quote replace
+
+
