@@ -35,14 +35,14 @@ label var for_cause_num "For Cause"
 compress
 
 merge m:1 recipient_name using "crosswalk.dta", ///
-	keep(master match) gen(merge_xwalk) keepusing(recip_name_standardized)
+	keep(master match) gen(merge_xwalk) keepusing(recip_name_standardized org_type)
 	
 drop merge_xwalk
 
-order awarding_office fain award_num recip_name_standardized
+order awarding_office fain award_num org_type recip_name_standardized
 compress
 
-gsort recip_name_standardized date_terminated
+gsort org_type recip_name_standardized date_terminated
 
 save "HHS_Grants_Terminated.dta", replace
 
