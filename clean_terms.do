@@ -1,6 +1,6 @@
 cd "~\Documents\HHSterminations\data"
 
-import excel "HHS_Grants_Terminated.xlsx", ///
+import excel "HHS_Grants_Terminated_raw.xlsx", ///
 	sheet("Table 1") firstrow clear
 
 rename AwardingOffice awarding_office
@@ -48,4 +48,6 @@ save "HHS_Grants_Terminated.dta", replace
 
 export delimited using "HHS_Grants_Terminated.csv", quote replace
 
+label var recip_name_standardized "Standardized Recipient Name"
 
+export excel using "HHS_Grants_Terminated.xlsx", firstrow(varlabels) replace
