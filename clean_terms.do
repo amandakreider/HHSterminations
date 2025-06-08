@@ -16,6 +16,21 @@ rename AwardTitle award_title
 rename PresidentialAction pres_action
 rename ForCausePutXifapplicable for_cause
 
+ds, has(type string) 
+local string_vars `r(varlist)'
+
+foreach var of local string_vars {
+	di "Variable = `var'"
+    cap noisily replace `var' = subinstr(`var',"`=char(9)'"," ",.)	// Converts tabs to regular spaces
+    cap noisily replace `var' = subinstr(`var',"`=char(10)'"," ",.)	// Converts line feeds  
+    cap noisily replace `var' = subinstr(`var',"`=char(11)'"," ",.)	// Converts vertical tabs
+    cap noisily replace `var' = subinstr(`var',"`=char(12)'"," ",.)	// Converts form feeds
+    cap noisily replace `var' = subinstr(`var',"`=char(13)'"," ",.)	// Converts carriage returns
+    cap noisily replace `var' = strtrim(`var')	// Removes leading and trailing whitespace 
+    cap noisily replace `var' = stritrim(`var')	// Removes excess internal spaces
+    cap noisily replace `var' = ustrtrim(`var')	// Unicode-aware version for removing leading and trailing whitespace
+}
+
 foreach var of varlist amt_obligated amt_expended total_payment_amt amt_unliquidated {
 	cap noisily list `var' if missing(real(`var'))
 	cap noisily replace `var' = "" if missing(real(`var'))
