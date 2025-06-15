@@ -29,6 +29,7 @@ foreach var of local string_vars {
     cap noisily replace `var' = strtrim(`var')	// Removes leading and trailing whitespace 
     cap noisily replace `var' = stritrim(`var')	// Removes excess internal spaces
     cap noisily replace `var' = ustrtrim(`var')	// Unicode-aware version for removing leading and trailing whitespace
+	cap noisily replace `var' = upper(`var')
 }
 
 foreach var of varlist amt_obligated amt_expended total_payment_amt amt_unliquidated {
