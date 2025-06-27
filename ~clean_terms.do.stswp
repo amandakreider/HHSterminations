@@ -58,7 +58,7 @@ drop merge_xwalk
 order awarding_office fain award_num org_type recip_name_standardized
 compress
 
-gsort org_type recip_name_standardized date_terminated award_num
+gsort org_type recip_name_standardized  date_terminated
 
 save "HHS_Grants_Terminated.dta", replace
 
