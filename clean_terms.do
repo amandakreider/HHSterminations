@@ -1,4 +1,5 @@
-cd "~\Documents\HHSterminations\data"
+*cd "~\Documents\HHSterminations\data"
+cd "~\Documents\git\HHSterminations\data"
 
 import excel "HHS_Grants_Terminated_raw.xlsx", ///
 	sheet("Table 1") firstrow clear
